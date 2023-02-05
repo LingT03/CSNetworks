@@ -16,16 +16,16 @@
 ~ Server Program (1 kinda,5)
 
 * Part Two 
-~ You'll have to do this on your own end 
-~ basically make a "HW02" dir on both server 
-~ Server A make "server" dir in HW02 
-~ Server B make "client" dir in HW02 
-~ Also include a txt file with both our names in "server" ($touch team.txt)
+** You'll have to do this on your own end 
+** basically make a "HW02" dir on both server 
+** Server A make "server" dir in HW02 
+** Server B make "client" dir in HW02 
+** Also include a txt file with both our names in "server" ($touch team.txt)
 
 # To do 
 * Part One 
-~ Client Program (4,5,6))
-~ Server Program (all)
+**  Client Program (4,5,6))
+**  Server Program (all)
 
 * Part Two
-~ need a "testResultsClient.txt" in HW02/client on server B 
+**  need a "testResultsClient.txt" in HW02/client on server B 
