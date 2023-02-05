@@ -17,6 +17,14 @@ public class HW2Server {
         String fromClient = null, toClient = null;
         boolean morePackets = true;
 
+        Map<String, Item> items = new HashMap<>();
+        items.put("00001", new Item("New Inspiron 15", "$379.99", 157));
+        items.put("00002", new Item("New Inspiron 17", "$449.99", 128));
+        items.put("00003", new Item("New Inspiron 15R", "$549.99", 202));
+        items.put("00004", new Item("New Inspiron 15z Ultrabook", "$749.99", 315));
+        items.put("00005", new Item("XPS 14 Ultrabook", "$999.99", 261));
+        items.put("00006", new Item("New XPS 12 UltrabookXPS", "$1199.99", 178));
+
         byte[] buf = new byte[256];
 
         while (morePackets) {
@@ -45,6 +53,7 @@ public class HW2Server {
             }
         }
 
+        // close the socket and resume
         udpServerSocket.close();
 
     }

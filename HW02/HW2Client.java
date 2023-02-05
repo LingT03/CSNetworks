@@ -37,6 +37,14 @@ public class HW2Client {
 
         while ((fromUser = sysIn.readLine()) != null) {
 
+            if (fromUser.equals("00001") || fromUser.equals("00002") || fromUser.equals("00003")
+                    || fromUser.equals("00004") || fromUser.equals("00005") || fromUser.equals("00006")) {
+                System.out.println("You have requested for item: " + fromUser);
+            } else {
+                System.out.println("Invalid Item ID. Please try again.");
+                continue;
+            }
+
             // display user input
             System.out.println("From Client: " + fromUser);
 
