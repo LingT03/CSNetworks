@@ -27,7 +27,7 @@
 - [ ] repeat step 2 and 3 until exception 
 - [x] Close Datagram socket
 
-* Part Two 
+# Part Two 
     * You'll have to do this on your own end 
     * basically make a "HW02" dir on both server 
     * Server A make "server" dir in HW02 
