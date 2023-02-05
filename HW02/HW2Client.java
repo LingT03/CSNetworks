@@ -19,7 +19,6 @@ public class HW2Client {
         DatagramSocket udpSocket = new DatagramSocket();
 
         BufferedReader sysIn = new BufferedReader(new InputStreamReader(System.in));
-        String line;
         String fromServer;
         String fromUser;
 
@@ -32,11 +31,11 @@ public class HW2Client {
         System.out.println("    this is your DNS/IP Address: " + address);
         System.out.println("    If you do not recognize this address, Please enter your DNS/IP Address: ");
         System.out.println("    Other wise press enter to continue:");
-        while ((line = sysIn.readLine()) != null) {
-            if (line.isEmpty()) {
+        while ((fromUser = sysIn.readLine()) != null) {
+            if (fromUser.isEmpty()) {
                 break;
             } else {
-                address = InetAddress.getByName(line);
+                address = InetAddress.getByName(fromUser);
                 System.out.println("Your DNS/IP Address is: " + address);
                 break;
             }
@@ -54,7 +53,8 @@ public class HW2Client {
         System.out.println("	00005                                    XPS 14 Ultrabook");
         System.out.println("	00006                                    New XPS 12 Ultrabook XPS");
 
-        while ((fromUser = sysIn.readLine()) != null) {
+        boolean ContinueLoop = true;
+        while ((ContinueLoop)) {
 
             if (fromUser.equals("00001") || fromUser.equals("00002") || fromUser.equals("00003")
                     || fromUser.equals("00004") || fromUser.equals("00005") || fromUser.equals("00006")) {
@@ -68,20 +68,26 @@ public class HW2Client {
             System.out.println("Fetching Information for: " + fromUser);
 
             byte[] buf = fromUser.getBytes();
-            DatagramPacket udpPacket = new DatagramPacket(buf, buf.length, address, 5270); // my port number
-            udpSocket.send(udpPacket);
+            DatagramPacket Packetout = new DatagramPacket(buf, buf.length, address, 5270); // my port number
+            long startTime = System.currentTimeMillis();
+            udpSocket.send(Packetout);
 
             // get response
-            byte[] buf2 = new byte[256];
-            DatagramPacket udpPacket2 = new DatagramPacket(buf2, buf2.length);
-            udpSocket.receive(udpPacket2);
+            byte[] buf2 = new byte[1024];
+            DatagramPacket Packetin = new DatagramPacket(buf2, buf2.length);
+            udpSocket.receive(Packetin);
+            long endTime = System.currentTimeMillis();
+            fromServer = new String(Packetout.getData(), 0, Packetout.getLength());
+            String[] responseData = fromServer.split(",");
 
             // display response
-            fromServer = new String(udpPacket2.getData(), 0, udpPacket2.getLength());
-            System.out.println("From Server: " + fromServer);
+            System.out.println("Item ID\tItem Description\tUnit Price\tInventory\tRTT of Query");
+            System.out.println(responseData[0] + "\t" + responseData[1] + "\t" + responseData[2] + "\t" +
+                    responseData[3] + "\t" + (endTime - startTime) + " ms");
 
-            if (fromUser.equals("Bye."))
-                break;
+            System.out.println("Would you like to request another item? (Yes/No)");
+            if (fromUser.equals("no"))
+                ContinueLoop = false;
         }
 
         udpSocket.close();
