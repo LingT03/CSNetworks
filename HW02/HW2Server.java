@@ -1,13 +1,14 @@
 /*
  * Server App upon UDP
- * Weiying Zhu
+ * Ling Thang
+ * Joaqin Trujillo
  */
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class UDPServer {
+public class HW2Server {
     public static void main(String[] args) throws IOException {
 
         DatagramSocket udpServerSocket = new DatagramSocket(5270); // changing port number to mine
