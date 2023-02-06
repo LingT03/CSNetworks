@@ -23,7 +23,6 @@
     - []
 # General Informatiom For HW03 
 * Todo
-<html>
     <h3>
     You'll have to do this on your own end <br/>
     basically make a "HW02" dir on both server <br/>
@@ -32,4 +31,3 @@
     Also include a txt file with both our names in "server" ($touch team.txt) <br/>
     Include a "testResultsClient.txt" in HW02/client on server B <br/>
     </h3>    
-</html>
