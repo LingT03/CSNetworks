@@ -7,6 +7,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.HashMap;
 
 public class HW2Server {
     public static void main(String[] args) throws IOException {
@@ -14,16 +15,17 @@ public class HW2Server {
         DatagramSocket udpServerSocket = new DatagramSocket(5270); // changing port number to mine
         BufferedReader in = null;
         DatagramPacket udpPacket = null, udpPacket2 = null;
-        String fromClient = null, toClient = null;
+        String fromClient = null, toClient = null, clientInfo=null;
         boolean morePackets = true;
 
-        Map<String, Item> items = new HashMap<>();
-        items.put("00001", new Item("New Inspiron 15", "$379.99", 157));
-        items.put("00002", new Item("New Inspiron 17", "$449.99", 128));
-        items.put("00003", new Item("New Inspiron 15R", "$549.99", 202));
-        items.put("00004", new Item("New Inspiron 15z Ultrabook", "$749.99", 315));
-        items.put("00005", new Item("XPS 14 Ultrabook", "$999.99", 261));
-        items.put("00006", new Item("New XPS 12 UltrabookXPS", "$1199.99", 178));
+	
+	HashMap<String, String> items = new HashMap<String, String>();
+	items.put("00001","New Inspiron 15,$379.99,157");
+	items.put("00002","New Inspiron 17,$449.99,128");
+	items.put("00003","New Inspiron 15R,$549.99,202");
+	items.put("00004","New Inspiron 15z Ultrabook,$749.99,315");
+	items.put("00005","XPS 14 Ultrabook,$999.99,261");
+	items.put("00006","New XPS 12 UltrabookXPS,$1199.99,178");
 
         byte[] buf = new byte[256];
 
@@ -36,14 +38,17 @@ public class HW2Server {
 
                 fromClient = new String(
                         udpPacket.getData(), 0, udpPacket.getLength(), "UTF-8");
+		//System.out.println(fromClient);//testing 0000n
 
                 // get the response
                 toClient = fromClient.toUpperCase();
+		clientInfo = items.get(toClient);
+		//System.out.println(items.get(toClient)); //testing info
 
                 // send the response to the client at "address" and "port"
                 InetAddress address = udpPacket.getAddress();
                 int port = udpPacket.getPort();
-                byte[] buf2 = toClient.getBytes("UTF-8");
+                byte[] buf2 = clientInfo.getBytes("UTF-8");//test
                 udpPacket2 = new DatagramPacket(buf2, buf2.length, address, port);
                 udpServerSocket.send(udpPacket2);
 
