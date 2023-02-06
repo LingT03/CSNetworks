@@ -22,7 +22,7 @@
     - []
     - []
 # General Informatiom For HW03 
-* Todo
+<h1>Todo</h1>
     <h3>
     You'll have to do this on your own end <br/>
     basically make a "HW02" dir on both server <br/>
