@@ -22,7 +22,7 @@
     - []
     - []
 # General Informatiom For HW03 
-<h5>
+<h3>
     <ul>
         <li>You'll have to do this on your own end </li>
         <li>basically make a "HW02" dir on both server </li>
@@ -31,4 +31,4 @@
         <li>Also include a txt file with both our names in "server" ($touch team.txt) </li>
         <li>Include a "testResultsClient.txt" in HW02/client on server B </li>
     </ul>   
-</h5>
+</h3>
