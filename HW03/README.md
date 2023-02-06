@@ -35,6 +35,6 @@
         <li>Also include a txt file with both our names in "server" ($touch team.txt) </li>
         <li>Include a "testResultsClient.txt" in HW02/client on server B </li> </br>
                 <b>Java prog_name_args | tee testResultsClient.txt</b> // copys output to .txt file</br>
-                <b>Cat file-name</b>                                  // displays contents of file
+                <b>Cat file-name</b> &emsp;&emsp;// displays contents of file
     </ul>   
 </h3>
