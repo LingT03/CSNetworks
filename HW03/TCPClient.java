@@ -3,7 +3,7 @@
  *
  * Weiying Zhu
  *
- */ 
+ */
 
 import java.io.*;
 import java.net.*;
@@ -16,10 +16,10 @@ public class TCPClient {
         BufferedReader socketIn = null;
 
         if (args.length != 1) {
-             System.out.println("Usage: java TCPClient <hostname>");
-             return;
+            System.out.println("Usage: java TCPClient <hostname>");
+            return;
         }
-                  
+
         try {
             tcpSocket = new Socket(args[0], 4567);
             socketOut = new PrintWriter(tcpSocket.getOutputStream(), true);
@@ -41,16 +41,14 @@ public class TCPClient {
             System.out.println("Client: " + fromUser);
 
             socketOut.println(fromUser);
-                                
-            if ((fromServer = socketIn.readLine()) != null)
-            {
+
+            if ((fromServer = socketIn.readLine()) != null) {
                 System.out.println("Server: " + fromServer);
-            }
-            else {
+            } else {
                 System.out.println("Server replies nothing!");
                 break;
             }
- 
+
             if (fromUser.equals("Bye.")) {
                 socketOut.close();
                 socketIn.close();

@@ -22,12 +22,12 @@
     - []
     - []
 # General Informatiom For HW03 
-<h2>Todo</h2>
-    <h3>
-    You'll have to do this on your own end <br/>
-    basically make a "HW02" dir on both server <br/>
-    Server A make "server" dir in HW02 <br/>
-    Server B make "client" dir in HW02 <br/>
-    Also include a txt file with both our names in "server" ($touch team.txt) <br/>
-    Include a "testResultsClient.txt" in HW02/client on server B <br/>
-    </h3>    
+*
+    <ul>
+        <li>You'll have to do this on your own end </li>
+        <li>basically make a "HW02" dir on both server </li>
+        <li>Server A make "server" dir in HW02 </li>
+        <li>Server B make "client" dir in HW02 </li>
+        <li>Also include a txt file with both our names in "server" ($touch team.txt) </li>
+        <li>Include a "testResultsClient.txt" in HW02/client on server B </li>
+    </ul>    
