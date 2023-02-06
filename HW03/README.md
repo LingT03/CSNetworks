@@ -25,16 +25,9 @@
     - [ ] Close all i/o, TCP sockets and threads for client
 
 # General Informatiom For HW03 Grading 
-
-<h3>
-    <ul>
-        <li>You'll have to do this on your own end </li>
-        <li>basically make a "HW02" dir on both server </li>
-        <li>Server A make "server" dir in HW02 </li>
-        <li>Server B make "client" dir in HW02 </li>
-        <li>Also include a txt file with both our names in "server" ($touch team.txt) </li>
-        <li>Include a "testResultsClient.txt" in HW02/client on server B </li> </br>
-                <b>Java prog_name_args | tee testResultsClient.txt</b> // copys output to .txt file</br>
-                <b>Cat file-name</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// displays contents of file
-    </ul>   
-</h3>
+* You'll have to do this on your own end
+* basically make a "HW02" dir on both server 
+* Server A make "server" dir in HW02 
+* Server B make "client" dir in HW02 
+* Also include a txt file with both our names in "server" ($touch team.txt)
+* Include a "testResultsClient.txt" in HW02/client on server B
