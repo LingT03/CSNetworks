@@ -61,7 +61,7 @@ public class HW2Client {
                 System.out.println("\n You have requested for item: " + fromUser);
             } else {
                 System.out.println("\n Invalid Item ID. Please try again.");
-                continue;
+                break;
             }
 
             // display user input
