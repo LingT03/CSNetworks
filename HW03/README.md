@@ -22,7 +22,6 @@
     - []
     - []
 # General Informatiom For HW03 
-*
     <ul>
         <li>You'll have to do this on your own end </li>
         <li>basically make a "HW02" dir on both server </li>
