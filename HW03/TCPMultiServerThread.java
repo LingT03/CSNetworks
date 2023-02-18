@@ -1,7 +1,7 @@
 /*
  * Server App upon TCP
  * A thread is started to handle every client TCP connection to this server
- * Weiying Zhu
+ * Ling Thang 
  */
 
 import java.net.*;
@@ -27,7 +27,7 @@ public class TCPMultiServerThread extends Thread {
             String fromClient, toClient;
 
             while ((fromClient = cSocketIn.readLine()) != null) {
-
+                System.out.println("From Client: " + fromClient);
                 toClient = fromClient.toUpperCase();
                 cSocketOut.println(toClient);
 
