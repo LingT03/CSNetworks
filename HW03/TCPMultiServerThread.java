@@ -1,13 +1,13 @@
 /*
  * Server App upon TCP
  * A thread is started to handle every client TCP connection to this server
- * Weiying Zhu
+ * Team: Jaoquin Trujillo, Ling Thang
  */
 
-import java.net.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.io.FileReader;
+import java.net.*;
+import java.util.ArrayList;
 
 public class TCPMultiServerThread extends Thread {
     private Socket clientTCPSocket = null; // Client socket
@@ -17,6 +17,7 @@ public class TCPMultiServerThread extends Thread {
         clientTCPSocket = socket;
     }
 
+    @Override
     public void run() {
 
         try {
@@ -26,7 +27,7 @@ public class TCPMultiServerThread extends Thread {
             BufferedReader cSocketIn = new BufferedReader(
                     new InputStreamReader(clientTCPSocket.getInputStream()));
 
-            String fromClient, toClient;
+            String fromClient;
             ArrayList<String> requestInfo = new ArrayList<String>();
             ArrayList<String> fileInfo = new ArrayList<String>();
             String method = "";
@@ -35,10 +36,7 @@ public class TCPMultiServerThread extends Thread {
             int counter = 0;
 
             while ((fromClient = cSocketIn.readLine()) != null) {
-                toClient = fromClient.toUpperCase();// Uppercase protocol
-                // cSocketOut.println(toClient);// send back to client
                 counter++;
-                // String method, fileName, version;
 
                 // TO DO : SPLIT UP THE FROM CLIENT INFO SO WE CAN GET THE METHOD AND
                 // THE FILE NAME SO WE CAN PUT INTO IF STATEMENTS
@@ -55,6 +53,9 @@ public class TCPMultiServerThread extends Thread {
                 System.out.println("File Name: " + fileName);
                 System.out.println("Version: " + version);
 
+                java.util.Date date = new java.util.Date();
+                String dateLine = "Date: " + date + "\r\n";
+                String serverLine = "Server: TEAMS'S SERVER\r\n";
                 File requested = new File("/home/lthang/HW03/server" + fileName);
 
                 // if client contains a get method and a file to be found 200 OK
@@ -62,11 +63,9 @@ public class TCPMultiServerThread extends Thread {
                     // return HEADERS and txt or htm
                     System.out.println("200 ok");
                     String statusLine = "HTTP/" + version + " 200 OK\r\n";
-                    java.util.Date date = new java.util.Date();
-                    String dateLine = "Date: " + date + "\r\n";
-                    String serverLine = "Server: TEAMS'S SERVER\r\n";
-                    String header = statusLine + dateLine + serverLine + "\r\n";
+                    String header = statusLine + dateLine + serverLine;
                     cSocketOut.println(header);
+
                     // TO ADD FILE AND APPEND FOUR LINES
                     FileReader fileReader = new FileReader(requested);
                     BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -75,10 +74,9 @@ public class TCPMultiServerThread extends Thread {
                         fileInfo.add(line);
                     }
                     for (String fileInfos : fileInfo) {
-                        System.out.println(fileInfos);
+                        fileInfos = fileInfos + "" + "\r\n" + "" + "\r\n" + "" + "\r\n" + "" + "\r\n";
                         cSocketOut.println(fileInfos);
                     }
-                    cSocketOut.println("\r\n\r\n\r\n");
                     bufferedReader.close();
                 }
 
@@ -87,9 +85,6 @@ public class TCPMultiServerThread extends Thread {
                     // return only HEADER with 404 status
                     System.out.println("404");
                     String statusLine = "HTTP/" + version + " 404 NOT FOUND\r\n";
-                    java.util.Date date = new java.util.Date();
-                    String dateLine = "Date: " + date + "\r\n";
-                    String serverLine = "Server: TEAMS'S SERVER\r\n";
                     String header = statusLine + dateLine + serverLine;
                     cSocketOut.println(header);
                 }
@@ -98,9 +93,6 @@ public class TCPMultiServerThread extends Thread {
                     // returnn only header with a 400 error staus
                     System.out.println("400");
                     String statusLine = "HTTP/" + version + " 400 BAD REQUEST\r\n";
-                    java.util.Date date = new java.util.Date();
-                    String dateLine = "Date: " + date + "\r\n";
-                    String serverLine = "Server: TEAM'S SERVER\r\n";
                     String header = statusLine + dateLine + serverLine;
                     cSocketOut.println(header);
                 }

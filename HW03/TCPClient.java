@@ -1,7 +1,7 @@
 /*
  * Client App upon TCP
  *
- * Weiying Zhu
+ * Team: Jaoquin Trujillo, Ling Thang
  *
  */
 
@@ -61,9 +61,6 @@ public class TCPClient {
 
         // CHANGED TO BOOLEAN
         while (cont) {
-            // System.out.println("Client: " + fromUser);
-
-            // socketOut.println(fromUser);
 
             // Get user input for HTTP request
             System.out.print("Enter HTTP method type (e.g. GET): ");
@@ -90,23 +87,32 @@ public class TCPClient {
                 System.out.println("Error: " + e.getMessage());
                 System.exit(1);
             }
+            // GET METHOD FROM SERVER (E.G. 200, 400, 404)
+            // COUNT BLANK LINES FOR 200 METHOD
+            // IF 4 BLANK LINES COUNTED AND STATUS CODE 200 STOP READLINING LINES FROM
+            // SERVER (MAYBE FLUSH?)
 
             // Send HTTP message request to server
+            socketIn.mark(0);
             if ((fromServer = socketIn.readLine()) != null) {
                 // FOR 404 and 400 CASE ONLY
-                while (count < 4) {
-                    System.out.println(fromServer);
+                while (count < 100) {
+                    System.out.println("Server Response:" + fromServer);
                     fromServer = socketIn.readLine();
                     count++;
+                    break;
                 }
             } else {
                 System.out.println("Server replies nothing!");
                 break;
             }
+            socketIn.reset();
+
             System.out.println("Would you like to continue (yes/no)?");
             fromUser = sysIn.readLine();
             boolean invalid = true;
 
+            // FIGURE OUT HOW TO OVERRIDE VARIABLES TO HAVE ANOTHER REQUEST!!!!
             while (invalid) {
                 if (fromUser.toUpperCase().equals("YES")) {
                     outToServer.writeBytes(fromUser + "\r\n");
