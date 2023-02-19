@@ -7,7 +7,7 @@
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.io.FileWriter;
+import java.io.FileReader;
 
 public class TCPMultiServerThread extends Thread {
     private Socket clientTCPSocket = null; // Client socket
@@ -28,6 +28,7 @@ public class TCPMultiServerThread extends Thread {
 
             String fromClient, toClient;
             ArrayList<String> requestInfo = new ArrayList<String>();
+            ArrayList<String> fileInfo = new ArrayList<String>();
             String method = "";
             String version = "";
             String fileName = "";
@@ -65,9 +66,20 @@ public class TCPMultiServerThread extends Thread {
                     String dateLine = "Date: " + date + "\r\n";
                     String serverLine = "Server: TEAMS'S SERVER\r\n";
                     String header = statusLine + dateLine + serverLine + "\r\n";
-                    // TO ADD FILE AND APPEND FOUR LINES
                     cSocketOut.println(header);
-
+                    // TO ADD FILE AND APPEND FOUR LINES
+                    FileReader fileReader = new FileReader(requested);
+                    BufferedReader bufferedReader = new BufferedReader(fileReader);
+                    String line = null;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        fileInfo.add(line);
+                    }
+                    for (String fileInfos : fileInfo) {
+                        System.out.println(fileInfos);
+                        cSocketOut.println(fileInfos);
+                    }
+                    cSocketOut.println("\r\n\r\n\r\n");
+                    bufferedReader.close();
                 }
 
                 // if method is get but file does NOT exist 404 error
