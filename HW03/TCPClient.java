@@ -1,7 +1,7 @@
 /*
  * Client App upon TCP
  *
- * Team: Jaoquin Trujillo, Ling Thang
+ * Weiying Zhu
  *
  */
 
@@ -57,7 +57,6 @@ public class TCPClient {
         String fromServer;
         String fromUser;
         Boolean cont = true;
-        int count = 0;
 
         // CHANGED TO BOOLEAN
         while (cont) {
@@ -87,37 +86,28 @@ public class TCPClient {
                 System.out.println("Error: " + e.getMessage());
                 System.exit(1);
             }
-            // GET METHOD FROM SERVER (E.G. 200, 400, 404)
+            // GET METHOD FROM SERVER (E.G. 200, 400, 404) 
             // COUNT BLANK LINES FOR 200 METHOD
-            // IF 4 BLANK LINES COUNTED AND STATUS CODE 200 STOP READLINING LINES FROM
-            // SERVER (MAYBE FLUSH?)
+            // IF 4 BLANK LINES COUNTED AND STATUS CODE 200 STOP READLINING LINES FROM SERVER (MAYBE FLUSH?)
 
             // Send HTTP message request to server
-            socketIn.mark(0);
+           
             if ((fromServer = socketIn.readLine()) != null) {
-                // FOR 404 and 400 CASE ONLY
-                while (count < 100) {
-                    System.out.println("Server Response:" + fromServer);
-                    fromServer = socketIn.readLine();
-                    count++;
+                System.out.println("Server: " + fromServer + "\r\n");
+                if (fromServer.contains("\r\n\r\n\r\n\r\n")) {
                     break;
                 }
-            } else {
-                System.out.println("Server replies nothing!");
-                break;
             }
-            socketIn.reset();
 
             System.out.println("Would you like to continue (yes/no)?");
             fromUser = sysIn.readLine();
             boolean invalid = true;
 
-            // FIGURE OUT HOW TO OVERRIDE VARIABLES TO HAVE ANOTHER REQUEST!!!!
+	    //FIGURE OUT HOW TO OVERRIDE VARIABLES TO HAVE ANOTHER REQUEST!!!!
             while (invalid) {
                 if (fromUser.toUpperCase().equals("YES")) {
                     outToServer.writeBytes(fromUser + "\r\n");
                     invalid = false;
-                    count = 0;
                 } else if (fromUser.toUpperCase().equals("NO")) {
                     // WE NEED TO SEND A BYE STRING TO SERVER SEE thread program for more info
                     outToServer.writeBytes(fromUser + "\r\n");
