@@ -9,17 +9,17 @@
 
 # TODO 
 * SMTP Client Program:
-    - [X] Ask for SMTP server's Host Name or IP Address
-    - [X]Build TCP connection with the SMTP server at given port
-    - [X]Collect sender's email address, receiver's email address, subject, and email content from the user
-    - [X]Send a series of SMTP commands to the server and display the response on the standard output
-    - [X]Ask the user whether to continue or quit, and act accordingly
+    - [ ] Ask for SMTP server's Host Name or IP Address
+    - [ ] Build TCP connection with the SMTP server at given port
+    - [ ] Collect sender's email address, receiver's email address, subject, and email content from the user
+    - [ ] Send a series of SMTP commands to the server and display the response on the standard output
+    - [ ] Ask the user whether to continue or quit, and act accordingly
 * SMTP Server Program:
-    - [X]Listen for incoming connections from SMTP clients
-    - [X] Create a new thread for each incoming connection request
-     - [X]Implement a 3-phase data transfer procedure for each client connection
-    - [X] Repeat step 3 until the client sends a "QUIT" command
-    - [X] Close all I/O streams and TCP socket for the client connection
+    - [ ] Listen for incoming connections from SMTP clients
+    - [ ] Create a new thread for each incoming connection request
+    - [ ] Implement a 3-phase data transfer procedure for each client connection
+    - [ ] Repeat step 3 until the client sends a "QUIT" command
+    - [ ] Close all I/O streams and TCP socket for the client connection
 
 # General Informatiom For HW03 Grading 
     * You'll have to do this on your own end
