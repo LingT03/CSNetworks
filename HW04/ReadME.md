@@ -28,4 +28,5 @@
     * Server B make "client" dir in HW02 
     * Also include a txt file with both our names in "server" ($touch team.txt)
     * Include a "testResultsClient.txt" in HW02/client on server B
-use "java prog_name | tee testResultsClient.txt" 
+
+    * use "java prog_name | tee testResultsClient.txt" 
