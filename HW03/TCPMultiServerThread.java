@@ -101,22 +101,21 @@ public class TCPMultiServerThread extends Thread {
                     String header = statusLine + dateLine + serverLine;
                     cSocketOut.println(header);
                 }
-
-                // When the client says no and breaks connection we need to send a output to
-                // server that says bye
-                System.out.println("********" + fromClient + "*******");
-                if (fromClient.toUpperCase().equals("NO")) {
-                    System.out.println("GoodBye! \n Terminating connection");
-
-                }
-
-                if (fromClient.toUpperCase().equals("YES")) {
-                    requestInfo.clear();
-                    counter = 0;
-                    continue;
-                }
-                System.out.println(counter);
             }
+            // When the client says no and breaks connection we need to send a output to
+            // server that says bye
+            System.out.println("********" + fromClient + "*******");
+            if (fromClient.toUpperCase().equals("NO")) {
+                System.out.println("GoodBye! \n Terminating connection");
+
+            }
+
+            if (fromClient.toUpperCase().equals("YES")) {
+                requestInfo.clear();
+                counter = 0;
+            }
+            System.out.println(counter);
+        
 
             cSocketOut.close();
             cSocketIn.close();
