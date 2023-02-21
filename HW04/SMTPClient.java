@@ -124,8 +124,6 @@ public class SMTPClient {
 
             System.out.println("Would you like to quit? (Type 'Quit' to quit)");
             System.out.print("To continue press 'ENTER': ");
-            System.out.println("===========================================================");
-
             fromUser = sysIn.readLine();
             if (fromUser.toLowerCase().equals("quit")) {
                 socketOut.close();
@@ -135,6 +133,7 @@ public class SMTPClient {
                 break;
             }
         }
+
         System.out.println("===========================================================");
         System.out.println("********** THANK YOU FOR USING THE SMTP CLIENT! **********\n");
         return;
