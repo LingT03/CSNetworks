@@ -20,7 +20,7 @@ public class SMTPMultiServer {
         try {
             serverTCPSocket = new ServerSocket(5270);
         } catch (IOException e) {
-            System.err.println("Could not listen on port: 4567.");
+            System.err.println("Could not listen on port: 5270.");
             System.exit(-1);
         }
 

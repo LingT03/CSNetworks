@@ -42,48 +42,91 @@ public class SMTPClient {
         }
 
         BufferedReader sysIn = new BufferedReader(new InputStreamReader(System.in));
-        String fromServer;
         String fromUser;
 
         // Initialize Letter informations
-        String letter = "";
-        String sender = "";
-        String recipient = "";
-        String subject = "";
-        String content = "";
 
-        while ((fromUser = sysIn.readLine()) != null) {
+        Boolean continueloop = true;
 
+        while (continueloop) {
+
+            Boolean helocheck = true;
+            Boolean mailcheck = true;
+            Boolean rcptcheck = true;
+            Boolean datacheck = true;
+
+            String helo = "";
+            String mail = "";
+            String rcpt = "";
+            String data = "";
+
+            // Get the letter information from the user
             System.out.println("\tPlease fill in the following information:");
             System.out.println("===========================================================");
-            System.out.print("From: ");
-            sender = sysIn.readLine();
-            System.out.print("To: ");
-            recipient = sysIn.readLine();
-            System.out.print("Subject: ");
-            subject = sysIn.readLine();
-            System.out.println("Content: ");
-            content = sysIn.readLine();
-            System.out.println("===========================================================");
 
-            // Create the letter
-            letter = "" + "From: " + sender + "\r\n" + "To: " + recipient + "\r\n" + "Subject: " + subject + "\r\n"
-                    + "Content: " + content + "\r\n";
+            // Check if the user has sent HELO to the server
+            while (helocheck) {
+                System.out.println("Please send HELO to the server first!");
+                helo = sysIn.readLine();
+                socketOut.println(helo);
+                String heloResponse = socketIn.readLine();
+                if ((heloResponse.contains("250"))) {
+                    System.out.println("Server replies: " + socketIn);
+                    break;
+                } else {
+                    System.out.println("503 5.5.2 Please Send HELO first!");
+                }
+            }
 
-            // Send the letter to the server
-            socketOut.println(letter);
+            // Check if the user has sent MAIL FROM to the server
 
-            // Get the response from the server
-            if ((fromServer = socketIn.readLine()) != null) {
-                System.out.println("Server: " + fromServer);
-            } else {
-                System.out.println("Server replies nothing!");
-                break;
+            while (mailcheck) {
+                System.out.println("Please send MAIL FROM to the server first!");
+                mail = sysIn.readLine();
+                socketOut.println(mail);
+                String mailResponse = socketIn.readLine();
+                if ((mailResponse.contains("205"))) {
+                    System.out.println("Server replies: " + socketIn);
+                    break;
+                } else {
+                    System.out.println("503 5.5.2 Please Send MAIL FROM!");
+                }
+
+            }
+
+            // Check if the user has sent RCPT TO to the server
+            while (rcptcheck) {
+                System.out.println("Please send RCPT TO to the server first!");
+                rcpt = sysIn.readLine();
+                socketOut.println(rcpt);
+                String rcptResponse = socketIn.readLine();
+                if ((rcptResponse.contains("250"))) {
+                    System.out.println("Server replies: " + socketIn);
+                    break;
+                } else {
+                    System.out.println("503 5.5.2 Please Send RCPT TO!");
+                }
+            }
+
+            // Check if the user has sent DATA to the server
+            while (datacheck) {
+                System.out.println("Please send DATA to the server first!");
+                data = sysIn.readLine();
+                socketOut.println(data);
+                String dataResponse = socketIn.readLine();
+                if ((dataResponse.contains("250"))) {
+                    System.out.println("Server replies: " + socketIn);
+                    break;
+                } else {
+                    System.out.println("503 5.5.2 Please Send DATA!");
+                }
             }
 
             System.out.println("Would you like to quit? (Type 'Quit' to quit)");
             System.out.print("To continue press 'ENTER': ");
+            System.out.println("===========================================================");
 
+            fromUser = sysIn.readLine();
             if (fromUser.toLowerCase().equals("quit")) {
                 socketOut.close();
                 socketIn.close();
