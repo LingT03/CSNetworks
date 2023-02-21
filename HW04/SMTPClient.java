@@ -58,7 +58,6 @@ public class SMTPClient {
             String helo = "";
             String mail = "";
             String rcpt = "";
-            String data = "";
 
             // Get the letter information from the user
             System.out.println("\tPlease fill in the following information:");
@@ -66,7 +65,7 @@ public class SMTPClient {
 
             // Check if the user has sent HELO to the server
             while (helocheck) {
-                System.out.println("Please send HELO to the server first!");
+                System.out.println("Constuct a message of this format: HELO <sender’s mail server domain name>");
                 helo = sysIn.readLine();
                 socketOut.println(helo);
                 String heloResponse = socketIn.readLine();
@@ -74,14 +73,14 @@ public class SMTPClient {
                     System.out.println("Server replies: " + socketIn);
                     break;
                 } else {
-                    System.out.println("503 5.5.2 Please Send HELO first!");
+                    System.out.println("503 5.5.2 Please include HELO!");
                 }
             }
 
             // Check if the user has sent MAIL FROM to the server
 
             while (mailcheck) {
-                System.out.println("Please send MAIL FROM to the server first!");
+                System.out.println("Constuct a message of this format: MAIL FROM:<sender’s email address>");
                 mail = sysIn.readLine();
                 socketOut.println(mail);
                 String mailResponse = socketIn.readLine();
@@ -89,14 +88,14 @@ public class SMTPClient {
                     System.out.println("Server replies: " + socketIn);
                     break;
                 } else {
-                    System.out.println("503 5.5.2 Please Send MAIL FROM!");
+                    System.out.println("503 5.5.2 Please include MAIL FROM!");
                 }
 
             }
 
             // Check if the user has sent RCPT TO to the server
             while (rcptcheck) {
-                System.out.println("Please send RCPT TO to the server first!");
+                System.out.println("Constuct a message of this format: RCPT TO:<recipient’s email address>");
                 rcpt = sysIn.readLine();
                 socketOut.println(rcpt);
                 String rcptResponse = socketIn.readLine();
@@ -104,15 +103,24 @@ public class SMTPClient {
                     System.out.println("Server replies: " + socketIn);
                     break;
                 } else {
-                    System.out.println("503 5.5.2 Please Send RCPT TO!");
+                    System.out.println("503 5.5.2 Please include RCPT TO!");
                 }
             }
 
             // Check if the user has sent DATA to the server
             while (datacheck) {
                 System.out.println("Please send DATA to the server first!");
-                data = sysIn.readLine();
-                socketOut.println(data);
+                StringBuilder data = new StringBuilder();
+                while (true) {
+                    String line = sysIn.readLine();
+                    data.append(line).append("\r\n");
+                    if (line.equals(".") && data.toString().endsWith("\r\n\r\n\r\n\r\n\r\n")) {
+                        // check for termination condition
+                        break;
+                    }
+                }
+                socketOut.println(data.toString());
+
                 String dataResponse = socketIn.readLine();
                 if ((dataResponse.contains("250"))) {
                     System.out.println("Server replies: " + socketIn);
