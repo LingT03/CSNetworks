@@ -1,5 +1,5 @@
 # Homework 2
-
+* Grade: 100/100
 # General Information: 
 * This repository implements information from Week 1-3
 
