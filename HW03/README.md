@@ -1,9 +1,8 @@
 # HW03 
-
+* Grade: 78/100
 # Team 
 * Ling Thang 
 * Joaquin Trujillo 
-* Carlos Gaytan Garcia (David)
 
 # General Information 
     This is a Multithreaded TCP Network system that takes User inputs from client server and converts the string to UpperCase from client format
