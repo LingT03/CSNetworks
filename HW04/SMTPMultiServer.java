@@ -18,7 +18,7 @@ public class SMTPMultiServer {
         System.out.println("===================================================");
 
         try {
-            serverTCPSocket = new ServerSocket(5270);
+            serverTCPSocket = new ServerSocket(5270);//Ling 5270 and Joaquin 5290
         } catch (IOException e) {
             System.err.println("Could not listen on port: 5270.");
             System.exit(-1);
